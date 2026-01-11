@@ -1,12 +1,19 @@
 version: "3.7"
 
 services:
-  matterbridge:
-    container_name: matterbridge
-    image: luligu/matterbridge:latest                         # Matterbridge image with the tag latest
-    network_mode: host                                        # Ensures the Matter mdns works
-    restart: always                                           # Ensures the container always restarts automatically
+  app_proxy:
+    image: getumbrel/app-proxy:v0.1.0
+    environment:
+      APP_HOST: matterbridge_server_1
+      APP_PORT: 8283
+    restart: on-failure
+
+  server:
+    container_name: matterbridge_server_1
+    image: luligu/matterbridge:latest
+    network_mode: host
+    restart: always
     volumes:
-      - "${HOME}/Matterbridge:/root/Matterbridge"             # Mounts the Matterbridge plugin directory
-      - "${HOME}/.matterbridge:/root/.matterbridge"           # Mounts the Matterbridge storage directory
-      - "${HOME}/.mattercert:/root/.mattercert"               # Mounts the Matterbridge certificate directory
+      - "${APP_DATA_DIR}/data/Matterbridge:/root/Matterbridge"
+      - "${APP_DATA_DIR}/data/.matterbridge:/root/.matterbridge"
+      - "${APP_DATA_DIR}/data/.mattercert:/root/.mattercert"
