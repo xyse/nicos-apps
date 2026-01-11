@@ -2,17 +2,16 @@ version: "3.7"
 
 services:
   app_proxy:
-    image: getumbrel/app-proxy:v0.1.0
     environment:
+      # The format here is: <app-id>_<docker-service-name>_1
       APP_HOST: matterbridge_server_1
       APP_PORT: 8283
-    restart: on-failure
 
   server:
     container_name: matterbridge_server_1
     image: luligu/matterbridge:latest
     network_mode: host
-    restart: always
+    restart: unless-stopped
     volumes:
       - "${APP_DATA_DIR}/data/Matterbridge:/root/Matterbridge"
       - "${APP_DATA_DIR}/data/.matterbridge:/root/.matterbridge"
