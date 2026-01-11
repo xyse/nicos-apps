@@ -1,0 +1,30 @@
+manifestVersion: 1
+id: matterbridge
+name: Matterbridge
+tagline: Matterbridge plugin manager for Matter
+icon: https://matterbridge.io/matterbridge.svg
+category: Smart Home
+version: "3.4.6"
+port: 8283
+description: >-
+  Matterbridge is a matter plugin manager for Matter that allows you to bridge non-matter devices to Matter.
+  It supports a wide range of plugins for Shelly, Zigbee2MQTT, Somfy, Home Assistant, and more.
+  It provides a user-friendly frontend to manage your plugins, devices, and configurations.
+
+
+developer: Luligu
+website: https://github.com/Luligu/matterbridge
+submitter: Nico
+submission: https://github.com/Luligu/matterbridge
+repo: https://github.com/Luligu/matterbridge
+support: https://github.com/Luligu/matterbridge/issues
+gallery:
+  - https://raw.githubusercontent.com/Luligu/matterbridge/main/screenshot/Screenshot%20devices.jpg
+  - https://raw.githubusercontent.com/Luligu/matterbridge/main/screenshot/Screenshot%20logs.jpg
+  - https://raw.githubusercontent.com/Luligu/matterbridge/main/screenshot/Screenshot%20config%20editor.jpg
+releaseNotes: >-
+  Initial release of Matterbridge app details.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
