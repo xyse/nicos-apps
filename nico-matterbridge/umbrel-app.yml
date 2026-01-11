@@ -5,7 +5,7 @@ tagline: Matterbridge plugin manager for Matter
 icon: https://matterbridge.io/matterbridge.svg
 category: Smart Home
 version: "3.4.6"
-port: 8123
+port: 10000
 description: >-
   Matterbridge is a matter plugin manager for Matter that allows you to bridge non-matter devices to Matter.
   It supports a wide range of plugins for Shelly, Zigbee2MQTT, Somfy, Home Assistant, and more.
