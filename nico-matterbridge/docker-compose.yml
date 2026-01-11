@@ -4,11 +4,10 @@ services:
   app_proxy:
     environment:
       # The format here is: <app-id>_<docker-service-name>_1
-      APP_HOST: matterbridge_server_1
-      APP_PORT: 8283
+      APP_HOST: nico-matterbridge_server_1
+      APP_PORT: 8123
 
   server:
-    container_name: matterbridge_server_1
     image: luligu/matterbridge:latest
     network_mode: host
     restart: unless-stopped
