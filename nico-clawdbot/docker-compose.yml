@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
   app_proxy:
     environment:
@@ -28,9 +26,6 @@ services:
       # Mounting all other apps' data directories as read-only for cross-app access
       # Note: This path assumes standard Umbrel installation. Adjust if your setup differs.
       - "${UMBREL_DATA_DIR:-/home/umbrel/umbrel}/app-data:/home/node/other_apps"
-    ports:
-      - "18789:18789"
-      - "18790:18790"
     init: true
     command:
       [
