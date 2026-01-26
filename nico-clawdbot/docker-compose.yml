@@ -1,0 +1,57 @@
+version: '3.7'
+
+services:
+  app_proxy:
+    environment:
+      # Use the ID of your app and the service name: <app-id>_<docker-service-name>_1
+      APP_HOST: nico-clawdbot_gateway_1
+      APP_PORT: 18789
+
+  gateway:
+    image: clawdbot/clawdbot:latest
+    restart: unless-stopped
+    environment:
+      HOME: /home/node
+      TERM: xterm-256color
+      CLAWDBOT_GATEWAY_TOKEN: ${CLAWDBOT_GATEWAY_TOKEN}
+      CLAUDE_AI_SESSION_KEY: ${CLAUDE_AI_SESSION_KEY}
+      CLAUDE_WEB_SESSION_KEY: ${CLAUDE_WEB_SESSION_KEY}
+      CLAUDE_WEB_COOKIE: ${CLAUDE_WEB_COOKIE}
+    volumes:
+      - "${APP_DATA_DIR}/data/config:/home/node/.clawdbot"
+      - "${APP_DATA_DIR}/data/workspace:/home/node/clawd"
+      # Mounting all other apps' data directories as read-only
+      - "/home/umbrel/umbrel/app-data:/home/node/other_apps:ro"
+    ports:
+      - "18789:18789"
+      - "18790:18790"
+    init: true
+    command:
+      [
+        "node",
+        "dist/index.js",
+        "gateway",
+        "--bind",
+        "0.0.0.0",
+        "--port",
+        "18789"
+      ]
+
+  cli:
+    image: clawdbot/clawdbot:latest
+    restart: "no"
+    environment:
+      HOME: /home/node
+      TERM: xterm-256color
+      BROWSER: echo
+      CLAUDE_AI_SESSION_KEY: ${CLAUDE_AI_SESSION_KEY}
+      CLAUDE_WEB_SESSION_KEY: ${CLAUDE_WEB_SESSION_KEY}
+      CLAUDE_WEB_COOKIE: ${CLAUDE_WEB_COOKIE}
+    volumes:
+      - "${APP_DATA_DIR}/data/config:/home/node/.clawdbot"
+      - "${APP_DATA_DIR}/data/workspace:/home/node/clawd"
+      - "/home/umbrel/umbrel/app-data:/home/node/other_apps:ro"
+    stdin_open: true
+    tty: true
+    init: true
+    entrypoint: ["node", "dist/index.js"]

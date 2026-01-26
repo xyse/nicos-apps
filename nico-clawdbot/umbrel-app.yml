@@ -1,0 +1,27 @@
+manifestVersion: 1
+id: nico-clawdbot
+name: Clawdbot
+tagline: AI-powered automation and bridge for your Umbrel.
+icon: https://raw.githubusercontent.com/clawdbot/clawdbot/main/assets/logo.png
+category: Utilities
+version: "0.1.0"
+port: 18789
+description: >-
+  Clawdbot is an AI-powered gateway and CLI tool that allows you to automate tasks and bridge between different applications.
+  It provides a powerful interface for interacting with Claude AI and other services directly from your Umbrel.
+  In this setup, it has read-only access to all other application data directories to assist with cross-app automation.
+
+developer: Clawdbot Team
+website: https://github.com/clawdbot/clawdbot
+submitter: Nico
+submission: https://github.com/clawdbot/clawdbot
+repo: https://github.com/clawdbot/clawdbot
+support: https://github.com/clawdbot/clawdbot/issues
+gallery:
+  - https://raw.githubusercontent.com/clawdbot/clawdbot/main/assets/screenshot-1.png
+releaseNotes: >-
+  Initial release for Nico's Umbrel App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
