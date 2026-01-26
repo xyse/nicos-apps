@@ -2,7 +2,7 @@ manifestVersion: 1
 id: nico-clawdbot
 name: Clawdbot
 tagline: Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞
-icon: https://raw.githubusercontent.com/clawdbot/clawdbot/main/README-header.png
+icon: https://clawd.bot/favicon.svg
 category: Utilities
 version: "0.1.0"
 port: 18789
@@ -19,7 +19,6 @@ submission: https://github.com/clawdbot/clawdbot
 repo: https://github.com/clawdbot/clawdbot
 support: https://github.com/clawdbot/clawdbot/issues
 gallery:
-  - https://raw.githubusercontent.com/clawdbot/clawdbot/main/README-header.png
 releaseNotes: >-
   Initial release for Nico's Umbrel App Store.
 dependencies: []
