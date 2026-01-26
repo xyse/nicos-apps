@@ -8,7 +8,9 @@ services:
       APP_PORT: 18789
 
   gateway:
-    image: clawdbot/clawdbot:latest
+    # Built from clawdbot/clawdbot via GitHub Actions in this repo
+    # Run the "Build and Push Clawdbot Image" workflow first to create this image
+    image: ghcr.io/xyse/clawdbot:latest
     restart: unless-stopped
     user: "1000:1000"
     environment:
