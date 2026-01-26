@@ -19,6 +19,9 @@ submission: https://github.com/clawdbot/clawdbot
 repo: https://github.com/clawdbot/clawdbot
 support: https://github.com/clawdbot/clawdbot/issues
 gallery:
+  - https://github.com/clawdbot/clawdbot/blob/main/docs/assets/showcase/agents-ui.jpg?raw=true
+  - https://github.com/clawdbot/clawdbot/blob/main/docs/assets/showcase/codexmonitor.png?raw=true
+  - https://github.com/clawdbot/clawdbot/blob/main/docs/assets/showcase/papla-tts.jpg?raw=true
 releaseNotes: >-
   Initial release for Nico's Umbrel App Store.
 dependencies: []
