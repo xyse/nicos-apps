@@ -10,18 +10,22 @@ services:
   gateway:
     image: clawdbot/clawdbot:latest
     restart: unless-stopped
+    user: "1000:1000"
     environment:
       HOME: /home/node
       TERM: xterm-256color
-      CLAWDBOT_GATEWAY_TOKEN: ${CLAWDBOT_GATEWAY_TOKEN}
-      CLAUDE_AI_SESSION_KEY: ${CLAUDE_AI_SESSION_KEY}
-      CLAUDE_WEB_SESSION_KEY: ${CLAUDE_WEB_SESSION_KEY}
-      CLAUDE_WEB_COOKIE: ${CLAUDE_WEB_COOKIE}
+      # Required environment variables - set these in Umbrel's environment
+      CLAWDBOT_GATEWAY_TOKEN: ${CLAWDBOT_GATEWAY_TOKEN:-}
+      CLAUDE_AI_SESSION_KEY: ${CLAUDE_AI_SESSION_KEY:-}
+      CLAUDE_WEB_SESSION_KEY: ${CLAUDE_WEB_SESSION_KEY:-}
+      CLAUDE_WEB_COOKIE: ${CLAUDE_WEB_COOKIE:-}
     volumes:
-      - "${APP_DATA_DIR}/data/config:/home/node/.clawdbot"
+      # Clawdbot's own data directories
+      - "${APP_DATA_DIR}/data/clawdbot:/home/node/.clawdbot"
       - "${APP_DATA_DIR}/data/workspace:/home/node/clawd"
-      # Mounting all other apps' data directories as read-only
-      - "/home/umbrel/umbrel/app-data:/home/node/other_apps:ro"
+      # Mounting all other apps' data directories as read-only for cross-app access
+      # Note: This path assumes standard Umbrel installation. Adjust if your setup differs.
+      - "${UMBREL_DATA_DIR:-/home/umbrel/umbrel}/app-data:/home/node/other_apps:ro"
     ports:
       - "18789:18789"
       - "18790:18790"
@@ -36,22 +40,3 @@ services:
         "--port",
         "18789"
       ]
-
-  cli:
-    image: clawdbot/clawdbot:latest
-    restart: "no"
-    environment:
-      HOME: /home/node
-      TERM: xterm-256color
-      BROWSER: echo
-      CLAUDE_AI_SESSION_KEY: ${CLAUDE_AI_SESSION_KEY}
-      CLAUDE_WEB_SESSION_KEY: ${CLAUDE_WEB_SESSION_KEY}
-      CLAUDE_WEB_COOKIE: ${CLAUDE_WEB_COOKIE}
-    volumes:
-      - "${APP_DATA_DIR}/data/config:/home/node/.clawdbot"
-      - "${APP_DATA_DIR}/data/workspace:/home/node/clawd"
-      - "/home/umbrel/umbrel/app-data:/home/node/other_apps:ro"
-    stdin_open: true
-    tty: true
-    init: true
-    entrypoint: ["node", "dist/index.js"]
