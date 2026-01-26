@@ -9,14 +9,23 @@ services:
     # Built from clawdbot/clawdbot via GitHub Actions in this repo
     # Run the "Build and Push Clawdbot Image" workflow first to create this image
     image: ghcr.io/xyse/clawdbot:latest
-    network_mode: host
     restart: unless-stopped
     user: "1000:1000"
     environment:
       HOME: /home/node
       TERM: xterm-256color
-      # Required environment variables - set these in Umbrel's environment
-      CLAWDBOT_GATEWAY_TOKEN: ${CLAWDBOT_GATEWAY_TOKEN:-}
+      # Clawdbot Configuration
+      CLAWDBOT_GATEWAY_BIND: "0.0.0.0"
+      CLAWDBOT_GATEWAY_PORT: "18789"
+      CLAWDBOT_BRIDGE_PORT: "18790"
+      
+      # internal paths
+      CLAWDBOT_CONFIG_DIR: "/home/node/.clawdbot"
+      CLAWDBOT_WORKSPACE_DIR: "/home/node/clawd"
+      
+      # Required environment variables
+      # Default token if not set (user should change this for security via Umbrel UI if possible)
+      CLAWDBOT_GATEWAY_TOKEN: ${CLAWDBOT_GATEWAY_TOKEN:-clawdbot}
       CLAUDE_AI_SESSION_KEY: ${CLAUDE_AI_SESSION_KEY:-}
       CLAUDE_WEB_SESSION_KEY: ${CLAUDE_WEB_SESSION_KEY:-}
       CLAUDE_WEB_COOKIE: ${CLAUDE_WEB_COOKIE:-}
@@ -24,9 +33,6 @@ services:
       # Clawdbot's own data directories
       - "${APP_DATA_DIR}/data/clawdbot:/home/node/.clawdbot"
       - "${APP_DATA_DIR}/data/workspace:/home/node/clawd"
-      # Mounting all other apps' data directories as read-only for cross-app access
-      # Note: This path assumes standard Umbrel installation. Adjust if your setup differs.
-      - "${UMBREL_DATA_DIR:-/home/umbrel/umbrel}/app-data:/home/node/other_apps"
     init: true
     command:
       [
