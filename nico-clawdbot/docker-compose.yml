@@ -2,13 +2,14 @@ services:
   app_proxy:
     environment:
       # Use the ID of your app and the service name: <app-id>_<docker-service-name>_1
-      APP_HOST: nico-clawdbot_gateway_1
+      APP_HOST: nico-clawdbot_server_1
       APP_PORT: 18789
 
-  gateway:
+  server:
     # Built from clawdbot/clawdbot via GitHub Actions in this repo
     # Run the "Build and Push Clawdbot Image" workflow first to create this image
     image: ghcr.io/xyse/clawdbot:latest
+    network_mode: host
     restart: unless-stopped
     user: "1000:1000"
     environment:
