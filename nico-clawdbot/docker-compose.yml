@@ -1,48 +1,32 @@
+version: '3.7'
 services:
   app_proxy:
     environment:
-      # Use the ID of your app and the service name: <app-id>_<docker-service-name>_1
       APP_HOST: nico-clawdbot_server_1
       APP_PORT: 18789
-
+    container_name: nico-clawdbot_app_proxy_1
   server:
-    # Built from clawdbot/clawdbot via GitHub Actions in this repo
-    # Run the "Build and Push Clawdbot Image" workflow first to create this image
     image: ghcr.io/xyse/clawdbot:latest
-    restart: unless-stopped
-    user: "1000:1000"
+    user: '1000:1000'
+    restart: on-failure
+    stop_grace_period: 1m
     environment:
       HOME: /home/node
       TERM: xterm-256color
-      # Clawdbot Configuration
-      CLAWDBOT_GATEWAY_BIND: "0.0.0.0"
-      CLAWDBOT_GATEWAY_PORT: "18789"
-      CLAWDBOT_BRIDGE_PORT: "18790"
-      
-      # internal paths
-      CLAWDBOT_CONFIG_DIR: "/home/node/.clawdbot"
-      CLAWDBOT_WORKSPACE_DIR: "/home/node/clawd"
-      
-      # Required environment variables
-      # Default token if not set (user should change this for security via Umbrel UI if possible)
+      CLAWDBOT_CONFIG_DIR: /home/node/.clawdbot
+      CLAWDBOT_WORKSPACE_DIR: /home/node/clawd
       CLAWDBOT_GATEWAY_TOKEN: ${CLAWDBOT_GATEWAY_TOKEN:-clawdbot}
-      CLAUDE_AI_SESSION_KEY: ${CLAUDE_AI_SESSION_KEY:-}
-      CLAUDE_WEB_SESSION_KEY: ${CLAUDE_WEB_SESSION_KEY:-}
-      CLAUDE_WEB_COOKIE: ${CLAUDE_WEB_COOKIE:-}
     volumes:
-      # Clawdbot's own data directories
-      - "${APP_DATA_DIR}/data/clawdbot:/home/node/.clawdbot"
-      - "${APP_DATA_DIR}/data/workspace:/home/node/clawd"
+      - ${APP_DATA_DIR}/data/clawdbot:/home/node/.clawdbot
+      - ${APP_DATA_DIR}/data/workspace:/home/node/clawd
     init: true
     command:
-      [
-        "node",
-        "dist/index.js",
-        "gateway",
-        "--bind",
-        "0.0.0.0",
-        "--port",
-        "18789",
-        "--allow-unconfigured",
-        "--gateway.mode=local"
-      ]
+      - node
+      - dist/index.js
+      - gateway
+      - '--allow-unconfigured'
+      - '--bind'
+      - lan
+      - '--port'
+      - '18789'
+    container_name: nico-clawdbot_server_1
