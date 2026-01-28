@@ -16,15 +16,13 @@ services:
       CLAWDBOT_CONFIG_DIR: /home/node/.clawdbot
       CLAWDBOT_WORKSPACE_DIR: /home/node/clawd
       CLAWDBOT_GATEWAY_TOKEN: ${CLAWDBOT_GATEWAY_TOKEN:-clawdbot}
-      CLAWDBOT_GATEWAY_CONTROL_UI_ALLOW_INSECURE_AUTH: "true"
     volumes:
       - ${APP_DATA_DIR}/data/clawdbot:/home/node/.clawdbot
       - ${APP_DATA_DIR}/data/workspace:/home/node/clawd
-    working_dir: /app
     init: true
     command:
       - node
-      - /app/dist/index.js
+      - dist/index.js
       - gateway
       - '--allow-unconfigured'
       - '--bind'
