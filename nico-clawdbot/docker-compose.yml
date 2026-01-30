@@ -2,22 +2,22 @@ version: '3.7'
 services:
   app_proxy:
     environment:
-      APP_HOST: nico-clawdbot_server_1
+      APP_HOST: nico-openclaw_server_1
       APP_PORT: 18789
-    container_name: nico-clawdbot_app_proxy_1
+    container_name: nico-openclaw_app_proxy_1
   server:
-    image: ghcr.io/xyse/clawdbot:latest
+    image: ghcr.io/xyse/openclaw:latest
     user: '1000:1000'
     restart: on-failure
     stop_grace_period: 1m
     environment:
       HOME: /home/node
       TERM: xterm-256color
-      CLAWDBOT_CONFIG_DIR: /home/node/.clawdbot
-      CLAWDBOT_WORKSPACE_DIR: /home/node/clawd
-      CLAWDBOT_GATEWAY_TOKEN: ${CLAWDBOT_GATEWAY_TOKEN:-clawdbot}
+      OPENCLAW_CONFIG_DIR: /home/node/.openclaw
+      OPENCLAW_WORKSPACE_DIR: /home/node/clawd
+      OPENCLAW_GATEWAY_TOKEN: ${OPENCLAW_GATEWAY_TOKEN:-openclaw}
     volumes:
-      - ${APP_DATA_DIR}/data/clawdbot:/home/node/.clawdbot
+      - ${APP_DATA_DIR}/data/openclaw:/home/node/.openclaw
       - ${APP_DATA_DIR}/data/workspace:/home/node/clawd
     init: true
     command:
@@ -29,4 +29,4 @@ services:
       - lan
       - '--port'
       - '18789'
-    container_name: nico-clawdbot_server_1
+    container_name: nico-openclaw_server_1

@@ -1,27 +1,27 @@
 manifestVersion: 1
-id: nico-clawdbot
-name: Clawdbot
+id: nico-openclaw
+name: Openclaw
 tagline: Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞
 icon: https://clawd.bot/favicon.svg
 category: Utilities
 version: "0.1.0"
 port: 18789
 description: >-
-  Clawdbot is an AI-powered personal assistant that runs locally on your Umbrel.
+  Openclaw is an AI-powered personal assistant that runs locally on your Umbrel.
   It provides a local-first Gateway with multi-channel inbox support (WhatsApp, Telegram, Slack, Discord, and more).
   Features include voice wake, live canvas, browser control, and multi-agent routing.
   In this setup, it has read-only access to all other application data directories to assist with cross-app automation.
 
 developer: Peter Steinberger and the community
-website: https://github.com/clawdbot/clawdbot
+website: https://github.com/openclaw/openclaw
 submitter: Nico
-submission: https://github.com/clawdbot/clawdbot
-repo: https://github.com/clawdbot/clawdbot
-support: https://github.com/clawdbot/clawdbot/issues
+submission: https://github.com/openclaw/openclaw
+repo: https://github.com/openclaw/openclaw
+support: https://github.com/openclaw/openclaw/issues
 gallery:
-  - https://github.com/clawdbot/clawdbot/blob/main/docs/assets/showcase/agents-ui.jpg?raw=true
-  - https://github.com/clawdbot/clawdbot/blob/main/docs/assets/showcase/codexmonitor.png?raw=true
-  - https://github.com/clawdbot/clawdbot/blob/main/docs/assets/showcase/papla-tts.jpg?raw=true
+  - https://github.com/openclaw/openclaw/blob/main/docs/assets/showcase/agents-ui.jpg?raw=true
+  - https://github.com/openclaw/openclaw/blob/main/docs/assets/showcase/codexmonitor.png?raw=true
+  - https://github.com/openclaw/openclaw/blob/main/docs/assets/showcase/papla-tts.jpg?raw=true
 releaseNotes: >-
   Initial release for Nico's Umbrel App Store.
 dependencies: []

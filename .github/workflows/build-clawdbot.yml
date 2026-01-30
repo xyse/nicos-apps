@@ -1,10 +1,10 @@
-name: Build and Push Clawdbot Image
+name: Build and Push Openclaw Image
 
 on:
   workflow_dispatch:
     inputs:
-      clawdbot_version:
-        description: 'Clawdbot version/tag to build (e.g., main, v1.0.0)'
+      openclaw_version:
+        description: 'Openclaw version/tag to build (e.g., main, v1.0.0)'
         required: false
         default: 'main'
   schedule:
@@ -13,7 +13,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/clawdbot
+  IMAGE_NAME: ${{ github.repository_owner }}/openclaw
 
 jobs:
   build-and-push:
@@ -23,11 +23,11 @@ jobs:
       packages: write
 
     steps:
-      - name: Checkout Clawdbot repository
+      - name: Checkout OpenClaw repository
         uses: actions/checkout@v4
         with:
-          repository: clawdbot/clawdbot
-          ref: ${{ github.event.inputs.clawdbot_version || 'main' }}
+          repository: openclaw/openclaw
+          ref: ${{ github.event.inputs.openclaw_version || 'main' }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -52,7 +52,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=latest
-            type=raw,value=${{ github.event.inputs.clawdbot_version || 'main' }}
+            type=raw,value=${{ github.event.inputs.openclaw_version || 'main' }}
             type=sha,prefix=
 
       - name: Build and push Docker image
