@@ -7,7 +7,7 @@ services:
     container_name: nico-openclaw_app_proxy_1
   server:
     image: ghcr.io/xyse/openclaw:latest
-    user: '1000:1000'
+    user: root
     restart: on-failure
     stop_grace_period: 1m
     environment:
@@ -19,6 +19,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/openclaw:/home/node/.openclaw
       - ${APP_DATA_DIR}/data/workspace:/home/node/clawd
+    working_dir: /app
     init: true
     command:
       - node
