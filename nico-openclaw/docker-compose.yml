@@ -19,6 +19,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/openclaw:/home/node/.openclaw
       - ${APP_DATA_DIR}/data/workspace:/home/node/clawd
+      - /home/umbrel/umbrel/app-data/code-server/data:/home/node/.openclaw/workspace/code-server
     working_dir: /app
     init: true
     command:
