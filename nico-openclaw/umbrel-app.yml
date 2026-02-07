@@ -4,7 +4,7 @@ name: Openclaw
 tagline: Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞
 icon: https://clawd.bot/favicon.svg
 category: Utilities
-version: "0.1.0"
+version: "0.1.1"
 port: 18789
 description: >-
   Openclaw is an AI-powered personal assistant that runs locally on your Umbrel.
